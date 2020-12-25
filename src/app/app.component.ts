@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from './shared/services/user.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  `,
 })
-export class AppComponent {
-  title = 'angular-chess-front';
+export class AppComponent implements OnInit{
+  constructor(private userService: UserService) {
+  }
+
+  ngOnInit(): void {
+    this.userService.populate();
+  }
 }

@@ -1,0 +1,60 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-half-desktop is-two-thirds-tablet">
+
+        <div class="has-text-centered">
+          <h1 class="title">{{title}}</h1>
+          <a class="has-text-centered is-size-5	" [routerLink]="['/register']" *ngIf="authType === authTypeEnum.Login">Need
+            an account ?</a>
+          <a class="has-text-centered is-size-5	" [routerLink]="['/login']" *ngIf="authType === authTypeEnum.Register">Have
+            an account ?</a>
+        </div>
+        <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+          <fieldset [disabled]="isSubmitting">
+            <fieldset class="field" *ngIf="authType === authTypeEnum.Register">
+              <label for="usernameInput" class="label">Username</label>
+              <div class="control has-icons-left has-icons-right">
+                <input type="email" formControlName="username" placeholder="username" class="input" required
+                       id="usernameInput">
+                <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+<!--                <span class="icon is-small is-right" *ngIf="!authForm.get('username').invalid"><i class="fas fa-check"></i></span>-->
+              </div>
+<!--              <div *ngIf="authForm.get('username').invalid && authForm.get('username').errors && (authForm.get('username').dirty || authForm.get('username').touched)">-->
+<!--                <p *ngIf="authForm.get('username').hasError('required')" class="help is-danger">This field is required</p>-->
+<!--              </div>-->
+            </fieldset>
+            <fieldset class="field">
+              <label for="emailInput" class="label">Email</label>
+              <div class="control has-icons-left">
+                <input type="email" formControlName="email" placeholder="e.g. bobsmith@gmail.com" class="input" required
+                       id="emailInput">
+                <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
+              </div>
+<!--              <div *ngIf="authForm.get('email').invalid && authForm.get('email').errors && (authForm.get('email').dirty || authForm.get('email').touched)">-->
+<!--                <p *ngIf="authForm.get('email').hasError('required')" class="help is-danger">This field is required</p>-->
+<!--                <p *ngIf="authForm.get('email').hasError('email')" class="help is-danger">This email is not valid</p>-->
+<!--              </div>-->
+
+            </fieldset>
+            <fieldset class="field">
+              <label for="passwordInput" class="label">Password</label>
+              <div class="control has-icons-left">
+                <input type="password" formControlName="password" placeholder="*******" class="input" id="passwordInput"
+                       required>
+                <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+              </div>
+<!--              <div *ngIf="authForm.get('password').invalid && authForm.get('password').errors && (authForm.get('password').dirty || authForm.get('password').touched)">-->
+<!--                <p *ngIf="authForm.get('password').hasError('required')" class="help is-danger">This field is required</p>-->
+<!--              </div>-->
+            </fieldset>
+            <div class="field">
+              <button class="button is-success" [disabled]="!authForm.valid">{{title}}</button>
+            </div>
+          </fieldset>
+        </form>
+        <app-list-errors [errors]="errors"></app-list-errors>
+      </div>
+    </div>
+  </div>
+</section>
